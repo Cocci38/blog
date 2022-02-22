@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use Database\DBConnection;
-
 class BlogController extends Controller{
 
     public function index()
@@ -13,8 +11,11 @@ class BlogController extends Controller{
 
     public function show(int $id)
     {
-        $db = new DBConnection('tutos1', 'localhost', 'root', '');
-        var_dump($db->getPDO());
+        $req = $this->db->getPDO()->query('SELECT * FROM posts');
+        $posts = $req->fetchAll(); // Pour récupérer toutes les données
+        foreach ($posts as $post){
+            echo $post->title;
+        }
         return $this->view('blog.show', compact('id')); //Fonction view dans le dossier blog pour appeller la vue show
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Router;
 
+use Database\DBConnection;
+
 class Route{
 
     public $path;
@@ -29,7 +31,7 @@ class Route{
     public function execute()
     {
         $params = explode('@', $this->action); // @ est le délimiteur de notre action
-        $controller = new $params[0](); // La 1ère clé du tableau params
+        $controller = new $params[0](new DBConnection('tutos1', 'localhost', 'root', '')); // La 1ère clé du tableau params
         $method = $params[1]; // La 2ème clé du tableau params
 
         return isset($this->matches[1]) ? $controller->$method($this->matches[1]) : $controller->$method();

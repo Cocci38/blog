@@ -43,6 +43,10 @@ class DBConnection{
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET UTF8'
         ]);
+        // On fait un tableau [] (PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION : Mettre des exceptions quand il y a des soucis)
+        /* (PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ : passer les infos récupérer de tableau
+        associatif (le mode par défaut) en OBJET)*/
+        // (PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET UTF8' : Pour mettre les caractères en utf8)
     }
 }
 
