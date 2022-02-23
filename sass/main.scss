@@ -1,6 +1,24 @@
+@mixin flex-around{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
 body{
     background-color: burlywood;
     margin: 50px 150px;
+}
+nav{
+    @include flex-around;
+    li{
+        list-style: none;
+        text-decoration:none;
+        a{
+            text-decoration:none;
+            list-style: none;
+        }
+    }
 }
 /*p{
     margin: 20px 100px;

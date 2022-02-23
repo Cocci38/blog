@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="<?= SCRIPTS . 'css' . DIRECTORY_SEPARATOR . 'style.css' ?>">
 </head>
 <body>
+    <nav>
+        
+
+            <a href="/site_poo/">Blog</a>
+            <li>
+                <a href="/site_poo/">Accueil</a>
+            </li>
+            <li>
+            <a href="/site_poo/posts/">Les derniers articles</a>
+            </li>
+
+    </nav>
     <?= $content?>
 </body>
 </html>

@@ -3,6 +3,21 @@ body {
   margin: 50px 150px;
 }
 
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+nav li {
+  list-style: none;
+  text-decoration: none;
+}
+nav li a {
+  text-decoration: none;
+  list-style: none;
+}
+
 /*p{
     margin: 20px 100px;
 }*/

@@ -12,7 +12,9 @@ define('SCRIPTS' , dirname($_SERVER['SCRIPT_NAME']). DIRECTORY_SEPARATOR);
 $router = new Router( $_GET['url']);
 
 // On appelle la fonction index et show dans le bloc BlogController
-$router->get('/', 'App\Controllers\BlogController@index'); // Un chemin '/' et une action BlogController@index' (le controller @ la méthode)
+//$router->get('/', 'App\Controllers\BlogController@index'); // Un chemin '/' et une action BlogController@index' (le controller @ la méthode)
+$router->get('/', 'App\Controllers\BlogController@welcome'); // Mène vers la fonction welcome
+$router->get('/posts', 'App\Controllers\BlogController@index'); // Mène liste tous les articles
 $router->get('/posts/:id', 'App\Controllers\BlogController@show'); // Dans l'url on écrit posts/id
 
 // Pour vérifier que nos routes fonctionnent
