@@ -8,6 +8,11 @@ require '../vendor/autoload.php';
 define ('VIEWS' , dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 // Contante qui envoie vers nos dossiers de script (dirname($_SERVER['SCRIPT_NAME']) pour avoir un bon chemin vers les scripts)
 define('SCRIPTS' , dirname($_SERVER['SCRIPT_NAME']). DIRECTORY_SEPARATOR);
+//'tutos1', 'localhost', 'root', '' :
+define('DB_NAME', 'tutos1');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PWD', '');
 
 $router = new Router( $_GET['url']);
 
