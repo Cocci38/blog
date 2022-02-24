@@ -20,7 +20,7 @@ class Router{
     // Pour boucler sur nos routes
     public function run()
     {
-        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) // On appelle nos routes avec la super variable serveur
+        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) // On appelle nos routes avec la super variable $_SERVER
         {
             if ($route->matches($this->url)) // La route a une fonction matches qui prend en paramètre l'url
                 return $route->execute(); // Cette fonction appelle le bon controlleur avec la bonne fonction
