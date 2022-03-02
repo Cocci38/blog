@@ -7,11 +7,13 @@ class Post extends Model{
 
     protected $table = 'posts';
 
+    // Fonction pour afficher la date et l'heure
     public function getCreatedAt(): string  // : string avec return
     {
         return (new DateTime($this->created_at))->format('d/m/Y à H:i');
     }
 
+    // Fonction pour raccourcir le contenu
     public function getExcerpt(): string // getExcerpt() => Pour raccourcir le contenu de notre Poste $content
     {
         return substr($this->content, 0, 200) . '...'; // substr => retourne un segment de chaine de caractère 
@@ -25,7 +27,18 @@ class Post extends Model{
         <a href="/site_poo/posts/$this->id">Lire l'article</a>
 HTML;
     }*/
-}
+
+    // Fonction pour récupérer tous les tags
+    public function getTags(){
+        return $this->query("SELECT t.* FROM tags t  
+                                            INNER JOIN post_tag pt ON pt.tag_id = t.id
+                                            INNER JOIN posts p ON pt. post_id = p.id
+                                            WHERE p.id = ?
+                                            ", $this->id); // $this->id  => on récupère l'id de notre instance
+    }   // t est un alias pour la table tags (Les alias sont la pour éviter les erreurs)
+        // pt est un alias pour la table post_tag
+        // p est un alias pour la table posts
+}       
 
 
 ?>
