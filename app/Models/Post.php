@@ -32,8 +32,7 @@ HTML;
     public function getTags(){
         return $this->query("SELECT t.* FROM tags t  
                                             INNER JOIN post_tag pt ON pt.tag_id = t.id
-                                            INNER JOIN posts p ON pt. post_id = p.id
-                                            WHERE p.id = ?
+                                            WHERE pt.post_id = ?
                                             ", $this->id); // $this->id  => on récupère l'id de notre instance
     }   // t est un alias pour la table tags (Les alias sont la pour éviter les erreurs)
         // pt est un alias pour la table post_tag
