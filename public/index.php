@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\NotFoundException;
 use Router\Router;
 
 require '../vendor/autoload.php';
@@ -24,6 +25,13 @@ $router->get('/posts/:id', 'App\Controllers\BlogController@show'); // Dans l'url
 $router->get('/tags/:id', 'App\Controllers\BlogController@tag'); // Dans l'url on écrit tags/id (on aura une fonction tag dans BlogController)
 
 // Pour vérifier que nos routes fonctionnent
-$router->run();
+// try => Pour tenter d'executer la fonction
+try{
+$router->run(); // On l'attrape avec catch si elle nous retourne une exception
+} catch (NotFoundException $e){
+    echo $e->getMessage(); // $e comme pour erreur  // $e->getMessage() => Pour afficher notre message
+}  // On tente d'executer cette fonction, si cette fonction relève une erreur (ici aucune route ne match avec l'url)
+    // On va pouvoir ratrapper notre exception qui est de classe Exception et lui passer  le message indiqué dans getMessage()
+
 
 ?>

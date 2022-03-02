@@ -2,6 +2,7 @@
 
 namespace Router;
 
+use App\Exceptions\NotFoundException;
 class Router{
 
     public $url;
@@ -25,7 +26,8 @@ class Router{
             if ($route->matches($this->url)) // La route a une fonction matches qui prend en paramètre l'url
                 return $route->execute(); // Cette fonction appelle le bon controlleur avec la bonne fonction
         }
-        return header('HTTP/1.0 404 Not Found');
+        throw new NotFoundException("La page demandée est introuvable :("); // On lance une nouvelle exception
+        // \Exception est une classe native de PHP, elle se trouve donc dans le namespace racine
     }
 }
 
