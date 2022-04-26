@@ -25,6 +25,10 @@ $router->get('/posts/:id', 'App\Controllers\BlogController@show'); // Dans l'url
 $router->get('/tags/:id', 'App\Controllers\BlogController@tag'); // Dans l'url on écrit tags/id (on aura une fonction tag dans BlogController)
 
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');// Mène à la liste des articles dans admin
+$router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
+$router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
+$router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
+$router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
 
 // Pour vérifier que nos routes fonctionnent
 // try => Pour tenter d'executer la fonction

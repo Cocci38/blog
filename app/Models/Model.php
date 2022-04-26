@@ -10,7 +10,6 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
 
     protected $db;
     protected $table;
-
     public function __construct(DBConnection $db)
     {
         $this->db = $db; // Je stocke ma connection à la base de donnée
@@ -37,11 +36,44 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
         // $stmt->execute([$id]); // execute renvoie un true ou un false
         // return $stmt->fetch(); // fetch sur $stmt et les résultats exploitablent sont stockés dans $post
     }
-   
+    public function create(array $data, ?array $relations = null)
+    {
+        $firstParenthesis = ""; // valeur après INSERT INTO
+        $secondParenthesis = ""; // valeur après VALUES
+        $i = 1;
+
+        foreach ($data as $key => $comma) {
+            $comma = $i === count($data) ? "" : ", "; // Si $i est strictement = au count de $data => on est arrivé à la fin alors on ne met rien sinon on met une virgule et un espace.
+            $firstParenthesis .= "{$key}{$comma}"; // .= pour cumuler les valeurs
+            $secondParenthesis .= ":{$key}{$comma}";
+            $i++;
+        }
+        //var_dump($firstParenthesis, $secondParenthesis); die();
+        return $this->query("INSERT INTO {$this->table} ($firstParenthesis)
+        VALUES($secondParenthesis), $data");
+    }
+
+    public function destroy(int $id): bool
+    {
+        return $this->query("DELETE FROM {$this->table} WHERE id = ?", $id); // On lui passe $id parce que c'est une requête préparée
+    }
     // Fonction qui nous permet de récupérer à la volée nos résultats en économisant du code
     public function query(string $sql, int $param = null, bool $single = null){ // requete sql, parfois on a un paramètre parfois non, pour savoir si on a un fetch() ou un fetchAll()
         
         $method = is_null($param) ? 'query' : 'prepare'; // est-ce que $param est null ? Si oui c'est une query() : Si non c'est un prepare()
+
+        // Pour vérifier si notre premier mot est un DELETE ou un UPDATE ou un CREATE parce que l'on ne veut pas rapporter de données
+        // strpos => permet de récupérer la position d'une chaîne de caractère
+        if (
+            strpos($sql, 'DELETE') === 0
+            || strpos($sql, 'UPDATE') === 0
+            || strpos($sql, 'INSERT') === 0) {
+
+                $stmt = $this->db->getPDO()->$method($sql); // method pour déterminer si on est en query() ou prepare()
+                $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
+                return $stmt->execute([$param]);
+        }
+
         $fetch = is_null($single) ? 'fetchAll' : 'fetch'; // est-ce que $single est null ? Si oui alors on utilise fetchAll() : Si non on utilise un fetch()
 
         $stmt = $this->db->getPDO()->$method($sql); // method pour déterminer si on est en query() ou prepare()

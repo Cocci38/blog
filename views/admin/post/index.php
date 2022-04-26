@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration</title>
-</head>
-<body>
-    <h1>La liste de nos articles</h1>
 
+    <h1>Administration des articles</h1>
+<a href="posts/create">Créer un nouvel article</a>
     <table>
         <thead>
             <tr>
@@ -23,15 +15,15 @@
                 <tr>
                     <th><?= $post->id ?>
                     <td><?= $post->title ?></td>
-                    <td><?= $post->created_at ?></td>
+                    <td><?= $post->getCreatedAt() ?></td>
                     <td>
                         <a href="#">Modifier</a>
-                        <a href="#">Supprimer</a>
+                        <form action="/site_poo/admin/posts/delete/<?= $post->id ?>" method="post">
+                            <button type="submit">Supprimer</button>
+                        </form>
                     </td>
                     </th>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
-</body>
-</html>

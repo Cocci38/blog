@@ -13,6 +13,34 @@ class PostController extends Controller{
 
         return $this->view('admin.post.index', compact('posts'));
     }
+    // Fonction pour renvoyer le formulaire
+    public function create()
+    {
+        return $this->view('admin.post.form');
+    }
+    // Fonction pour traiter les données envoyées en Post
+    public function createPost()
+    {
+        $post = new Post($this->getDB());
+
+        $tags = array_pop($_POST);
+
+        $result = $post->create($_POST, $tags);
+
+        if ($result) {
+            return header('Location: /site_poo/admin/posts');
+        }
+    }
+    
+    public function destroy(int $id)
+    {
+        $post = new Post($this->getDB());
+        $result = $post->destroy($id);
+
+        if ($result){
+            return header('Location: /site_poo/admin/posts');
+        }
+    }
 }
 
 

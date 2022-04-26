@@ -37,6 +37,20 @@ HTML;
     }   // t est un alias pour la table tags (Les alias sont la pour éviter les erreurs)
         // pt est un alias pour la table post_tag
         // p est un alias pour la table posts
+
+        public function create(array $data, ?array $relations = null)
+    {
+        parent::create($data);
+
+        $id = $this->db->getPDO()->lastInsertId();
+
+        foreach ($relations as $tagId) {
+            $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
+            $stmt->execute([$id, $tagId]);
+        }
+
+        return true;
+    }
 }       
 
 
