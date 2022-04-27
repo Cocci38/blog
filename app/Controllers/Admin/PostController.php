@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller{
 
@@ -32,6 +33,26 @@ class PostController extends Controller{
         }
     }
     
+    public function edit(int $id)
+    {
+        $post = (new Post($this->getDB()))->findById($id);
+        $tags = (new Tag($this->getDB()))->all();
+        return $this->view('admin.post.edit', compact('post', 'tags'));
+    }
+
+    public function update(int $id)
+    {
+        $post = new Post($this->getDB());
+
+        $tags = array_pop($_POST); // array_pop() => dépile et retourne la valeur du dernier élément du tableau array, le raccourcissant d'un élément.
+
+        $result = $post->update($id, $_POST, $tags); // Methode update pour mettre à jour dynamiquement les données ($_POST contient les infos à changer)
+
+        if ($result){
+            return header('Location: /site_poo/admin/posts');
+        }
+    }
+
     public function destroy(int $id)
     {
         $post = new Post($this->getDB());

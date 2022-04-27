@@ -17,7 +17,7 @@
                     <td><?= $post->title ?></td>
                     <td><?= $post->getCreatedAt() ?></td>
                     <td>
-                        <a href="#">Modifier</a>
+                        <a href="/site_poo/admin/posts/edit/<?= $post->id ?>">Modifier</a>
                         <form action="/site_poo/admin/posts/delete/<?= $post->id ?>" method="post">
                             <button type="submit">Supprimer</button>
                         </form>

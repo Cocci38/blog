@@ -28,7 +28,7 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
 
     public function findById(int $id): Model // : Model ça me renvoie une instance de Model car Post hérite de Model
     {
-        return $this->query("SELECT * FROM {$this->table} WHERE id = ?", $id, true); // Pour remplacer le code du dessous  grâce à la public function query plus bas
+        return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true); // Pour remplacer le code du dessous  grâce à la public function query plus bas
         
         // getPDO()->prepare pour ce protéger des failles sql et des injections (avec prepare)
         // $stmt = $this->db->getPDO()->prepare("SELECT * FROM {$this->table} WHERE id = ?");
@@ -53,12 +53,29 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
         VALUES($secondParenthesis), $data");
     }
 
+    public function update(int $id, array $data, ?array $relations = null)
+    {
+        $sqlRequestPart = "";
+        $i = 1;
+        foreach ($data as $key => $value) {
+            $comma = $i == count($data) ? " " : ', '; // Pour ajouter les virgules si on en a besoin
+            $sqlRequestPart .= "{$key} = :{$key}{$comma}"; //  Pour faire dynamique ça => title = :title, content = :content
+            $i++;
+        }
+        $data['id'] = $id;
+
+        return $this->query("UPDATE {$this->table} SET {$sqlRequestPart} WHERE id = :id", $data); // $data uniquement avec la fonction query 
+        // Quand on lui passe $data, il va pouvoir executer avec le tableau de donnée et à la fin il executera la requête préparée avec l'id
+        
+        //$sql = "UPDATE {$this->table} SET title = :title, content = :content WHERE id = :id";
+    }
+
     public function destroy(int $id): bool
     {
-        return $this->query("DELETE FROM {$this->table} WHERE id = ?", $id); // On lui passe $id parce que c'est une requête préparée
+        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]); // On lui passe $id parce que c'est une requête préparée
     }
     // Fonction qui nous permet de récupérer à la volée nos résultats en économisant du code
-    public function query(string $sql, int $param = null, bool $single = null){ // requete sql, parfois on a un paramètre parfois non, pour savoir si on a un fetch() ou un fetchAll()
+    public function query(string $sql, array $param = null, bool $single = null){ // requete sql, parfois on a un paramètre parfois non, pour savoir si on a un fetch() ou un fetchAll()
         
         $method = is_null($param) ? 'query' : 'prepare'; // est-ce que $param est null ? Si oui c'est une query() : Si non c'est un prepare()
 
@@ -71,7 +88,7 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
 
                 $stmt = $this->db->getPDO()->$method($sql); // method pour déterminer si on est en query() ou prepare()
                 $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
-                return $stmt->execute([$param]);
+                return $stmt->execute($param);
         }
 
         $fetch = is_null($single) ? 'fetchAll' : 'fetch'; // est-ce que $single est null ? Si oui alors on utilise fetchAll() : Si non on utilise un fetch()
@@ -82,7 +99,7 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
         if ($method=='query') {               // $method strictement égale à query
             return $stmt->$fetch();          // si on a une query() on retourne directement notre résultat fetch() 
         } else {
-            $stmt->execute([$param]);   // si différent de query alors on a rempli quelque chose dans $params donc on execute $param
+            $stmt->execute($param);   // si différent de query alors on a rempli quelque chose dans $params donc on execute $param
             return $stmt->$fetch();         // ensuite on retourne dans tous les cas $stmt->$fetch();
         }
     }

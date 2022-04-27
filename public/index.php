@@ -27,9 +27,9 @@ $router->get('/tags/:id', 'App\Controllers\BlogController@tag'); // Dans l'url o
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');// Mène à la liste des articles dans admin
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
+$router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy'); // Le chemin pour la fonction delete
 $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
-$router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
-
+$router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 // Pour vérifier que nos routes fonctionnent
 // try => Pour tenter d'executer la fonction
 try{
