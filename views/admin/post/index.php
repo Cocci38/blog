@@ -1,5 +1,6 @@
 
-    <h1>Administration des articles</h1>
+<h1>Administration des articles</h1>
+
 <a href="posts/create">Créer un nouvel article</a>
     <table>
         <thead>

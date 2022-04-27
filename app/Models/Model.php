@@ -50,7 +50,7 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
         }
         //var_dump($firstParenthesis, $secondParenthesis); die();
         return $this->query("INSERT INTO {$this->table} ($firstParenthesis)
-        VALUES($secondParenthesis), $data");
+        VALUES($secondParenthesis)", $data);
     }
 
     public function update(int $id, array $data, ?array $relations = null)
@@ -58,7 +58,7 @@ abstract class Model{ //abstract parce qu'elle ne sera jamais instancier
         $sqlRequestPart = "";
         $i = 1;
         foreach ($data as $key => $value) {
-            $comma = $i == count($data) ? " " : ', '; // Pour ajouter les virgules si on en a besoin
+            $comma = $i == count($data) ? "" : ', '; // Pour ajouter les virgules si on en a besoin
             $sqlRequestPart .= "{$key} = :{$key}{$comma}"; //  Pour faire dynamique ça => title = :title, content = :content
             $i++;
         }

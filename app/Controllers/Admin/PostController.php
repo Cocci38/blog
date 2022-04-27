@@ -17,14 +17,16 @@ class PostController extends Controller{
     // Fonction pour renvoyer le formulaire
     public function create()
     {
-        return $this->view('admin.post.form');
+        $tags = (new Tag($this->getDB()))->all();
+
+        return $this->view('admin.post.form', compact('tags'));
     }
     // Fonction pour traiter les données envoyées en Post
     public function createPost()
     {
         $post = new Post($this->getDB());
 
-        $tags = array_pop($_POST);
+        $tags = array_pop($_POST); // $_POST ne contient que le title et content / $tags ne contient que les tags
 
         $result = $post->create($_POST, $tags);
 
@@ -37,7 +39,7 @@ class PostController extends Controller{
     {
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
-        return $this->view('admin.post.edit', compact('post', 'tags'));
+        return $this->view('admin.post.form', compact('post', 'tags'));
     }
 
     public function update(int $id)
