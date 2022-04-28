@@ -10,6 +10,11 @@ abstract class Controller{ //abstract parce qu'elle ne sera jamais instancier
 
     public function __construct(DBConnection $db)
     {
+        // session_status() est utilisée pour connaitre l'état de la session courante.
+        // Si on pas de session, on la démarre (sinon on ne fait rien)
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $this->db = $db;
     }
 
@@ -29,6 +34,15 @@ abstract class Controller{ //abstract parce qu'elle ne sera jamais instancier
     protected function getDB()
     {
         return $this->db;
+    }
+
+    protected function isAdmin()
+    {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 1) {
+            return true;
+        } else {
+            return header('Location: /site_poo/login');
+        }
     }
 }
 

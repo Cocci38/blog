@@ -24,6 +24,10 @@ $router->get('/posts', 'App\Controllers\BlogController@index'); // Mène liste t
 $router->get('/posts/:id', 'App\Controllers\BlogController@show'); // Dans l'url on écrit posts/id
 $router->get('/tags/:id', 'App\Controllers\BlogController@tag'); // Dans l'url on écrit tags/id (on aura une fonction tag dans BlogController)
 
+$router->get('/login', 'App\Controllers\UserController@login');
+$router->post('/login', 'App\Controllers\UserController@loginPost');
+$router->get('/logout', 'App\Controllers\UserController@logout');
+
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');// Mène à la liste des articles dans admin
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');

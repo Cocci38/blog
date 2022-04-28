@@ -1,6 +1,10 @@
 
 <h1>Administration des articles</h1>
 
+<?php if(isset($_GET['success'])) : ?>
+    <div>Vous êtes connecté</div>
+<?php endif ?>
+
 <a href="posts/create">Créer un nouvel article</a>
     <table>
         <thead>

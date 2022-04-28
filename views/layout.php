@@ -19,6 +19,14 @@
             <a href="/site_poo/posts/">Les derniers articles</a>
             </li>
 
+            <ul>
+                <?php if(isset($_SESSION['auth'])) : ?>
+                <li>
+                    <a href="/site_poo/logout">Se déconnecter</a>
+                </li>
+                <?php endif ?>
+            </ul>
+
     </nav>
     <?= $content?>
 </body>
