@@ -2,8 +2,10 @@
 
 <?php // On boucle sur nos articles
 foreach($params['tag']->getPosts() as $post) : ?>
-<div>
-    <a href="/site_poo/posts/<?= $post->id ?>"><?= $post->title ?> </a>
-</div>
+    <div class="card mb-3">
+        <div class="card-body">
+            <a><a href="/site_poo/posts/<?= $post->id ?>" class="btn btn-link text-decoration-none"><?= $post->title ?> </a></a>
+        </div>
+    </div>
 
 <?php  endforeach ?>

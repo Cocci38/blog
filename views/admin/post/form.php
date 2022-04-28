@@ -11,7 +11,7 @@
     </div>
     <div class="form-group">
         <label for="tags">Tags de l'article</label>
-        <select multiple class="form-control" id="tags" name="tags[]">
+        <select multiple class="form-select" id="tags" name="tags[]">
             <?php foreach ($params['tags'] as $tag) : ?>
                 <option value="<?= $tag->id ?>"
                     <?php if (isset($params['post'])) : ?>
@@ -23,5 +23,6 @@
             <?php endforeach ?>
         </select>
     </div>
-    <button type="submit" class=""><?= isset($params['post']) ? 'Enregistrer les modifications' : 'Enregistrer mon article' ?></button>
+    <br>
+    <button type="submit" class="btn btn-info"><?= isset($params['post']) ? 'Enregistrer les modifications' : 'Enregistrer mon article' ?></button>
 </form>

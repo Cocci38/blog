@@ -1,21 +1,25 @@
+@import url(https://bootswatch.com/5/cerulean/bootstrap.min.css);
 body {
-  background-color: burlywood;
+  background-color: #e9ecef;
+}
+
+a {
+  text-decoration: none;
+  color: #e9ecef;
+}
+
+main {
   margin: 50px 150px;
 }
 
-nav {
+h1 {
+  text-align: center;
+}
+
+.action {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
-nav li {
-  list-style: none;
-  text-decoration: none;
-}
-nav li a {
-  text-decoration: none;
-  list-style: none;
+  gap: 10px;
 }
 
 /*p{

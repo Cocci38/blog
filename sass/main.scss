@@ -1,3 +1,6 @@
+@import url(https://bootswatch.com/5/cerulean/bootstrap.min.css);
+$light : #e9ecef;
+
 @mixin flex-around{
     display: flex;
     flex-direction: row;
@@ -6,20 +9,35 @@
 }
 
 body{
-    background-color: burlywood;
+    background-color: $light;
+    //margin: 50px 150px;
+}
+a{
+    text-decoration: none;
+    color: $light;
+}
+main{
     margin: 50px 150px;
 }
-nav{
-    @include flex-around;
-    li{
-        list-style: none;
-        text-decoration:none;
-        a{
-            text-decoration:none;
-            list-style: none;
-        }
-    }
+h1{
+    text-align: center;
 }
+.action{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+// nav{
+//     @include flex-around;
+//     li{
+//         list-style: none;
+//         text-decoration:none;
+//         a{
+//             text-decoration:none;
+//             list-style: none;
+//         }
+//     }
+// }
 /*p{
     margin: 20px 100px;
 }*/
