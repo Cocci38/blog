@@ -41,7 +41,7 @@ abstract class Controller{ //abstract parce qu'elle ne sera jamais instancier
         if (isset($_SESSION['auth']) && $_SESSION['auth'] === 1) {
             return true;
         } else {
-            return header('Location: /site_poo/login');
+            return header('Location: /blog/login');
         }
     }
 }

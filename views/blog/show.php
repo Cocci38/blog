@@ -5,6 +5,6 @@
     <?php endforeach ?>
     <hr class="my-4">
     <p class="lead"><?= $params['post'] ->content ?></p>
-    <a href="/site_poo/posts/" class="btn btn-primary">Retour</a>        
+    <a href="/blog/posts/" class="btn btn-primary">Retour</a>        
 
 </div>

@@ -15,7 +15,7 @@
 <?php session_destroy(); ?>
 <h1>Se connecter</h1>
 
-<form action="/site_poo/login" method="POST">
+<form action="/blog/login" method="POST">
     <fieldset>
         <div class="form-group">
             <label for="username" >Nom d'utilisateur</label>

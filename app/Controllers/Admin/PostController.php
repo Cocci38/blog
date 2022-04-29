@@ -37,7 +37,7 @@ class PostController extends Controller{
         $result = $post->create($_POST, $tags);
 
         if ($result) {
-            return header('Location: /site_poo/admin/posts');
+            return header('Location: /blog/admin/posts');
         }
     }
     
@@ -62,7 +62,7 @@ class PostController extends Controller{
         $result = $post->update($id, $_POST, $tags); // Methode update pour mettre à jour dynamiquement les données ($_POST contient les infos à changer)
 
         if ($result){
-            return header('Location: /site_poo/admin/posts');
+            return header('Location: /blog/admin/posts');
         }
     }
 
@@ -74,7 +74,7 @@ class PostController extends Controller{
         $result = $post->destroy($id);
 
         if ($result){
-            return header('Location: /site_poo/admin/posts');
+            return header('Location: /blog/admin/posts');
         }
     }
 }

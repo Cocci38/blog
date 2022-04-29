@@ -22,14 +22,14 @@ class UserController extends Controller{
         
         if ($errors) {
             $_SESSION['errors'][] = $errors;
-            header('Location: /site_poo/login');
+            header('Location: /blog/login');
             exit;
         }
         $user = (new User($this->getDB()))->getByUsername($_POST['username']);
 
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['auth'] = (int) $user->admin;
-            return header('Location: /site_poo/admin/posts?success=true');
+            return header('Location: /blog/admin/posts?success=true');
         } else {
             return header('Location: /login');
         }
@@ -39,7 +39,7 @@ class UserController extends Controller{
     {
         session_destroy();
 
-        return header('Location: /site_poo/');
+        return header('Location: /blog/');
     }
 }
 

@@ -13,7 +13,7 @@ foreach($params['posts'] as $post): ?>
         <small class="text-info">Publié le <?= $post->getCreatedAt() ?></small> <!-- La balise small pour écrire en petit (style commentaire) -->
         <p><?= $post->getExcerpt() ?></p>
         <?PHP // $post->getButton() => Si on utlilse la syntaxe Heredoc (voir sur Post.php)?>
-        <a href="/site_poo/posts/<?= $post->id  ?>" class="btn btn-primary"> Lire l'article</a>
+        <a href="/blog/posts/<?= $post->id  ?>" class="btn btn-primary"> Lire l'article</a>
     </div>
 </div>
 

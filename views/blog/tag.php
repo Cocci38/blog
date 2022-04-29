@@ -4,7 +4,7 @@
 foreach($params['tag']->getPosts() as $post) : ?>
     <div class="card mb-3">
         <div class="card-body">
-            <a><a href="/site_poo/posts/<?= $post->id ?>" class="btn btn-link text-decoration-none"><?= $post->title ?> </a></a>
+            <a><a href="/blog/posts/<?= $post->id ?>" class="btn btn-link text-decoration-none"><?= $post->title ?> </a></a>
         </div>
     </div>
 
