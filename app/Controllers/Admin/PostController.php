@@ -47,6 +47,7 @@ class PostController extends Controller{
 
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
+
         return $this->view('admin.post.form', compact('post', 'tags'));
     }
 

@@ -11,15 +11,15 @@
     </div>
     <div class="form-group">
         <label for="tags">Tags de l'article</label>
-        <select multiple class="form-select" id="tags" name="tags[]">
+        <select multiple class="form-control" id="tags" name="tags[]">
             <?php foreach ($params['tags'] as $tag) : ?>
                 <option value="<?= $tag->id ?>"
-                    <?php if (isset($params['post'])) : ?>
-                    <?php foreach ($params['post']->getTags() as $postTag) {
-                        echo ($tag->id == $postTag->id) ? 'selected' : '';
-                    } ?>
-                    <?php endif ?>
-                ><?= $tag->name ?></option>
+                <?php if (isset($params['post'])) : ?>
+                <?php foreach ($params['post']->getTags() as $postTag) {
+                    echo ($tag->id === $postTag->id) ? 'selected' : '';
+                }
+                ?>
+                <?php endif ?>><?= $tag->name ?></option>
             <?php endforeach ?>
         </select>
     </div>

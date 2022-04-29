@@ -62,13 +62,11 @@ HTML;
         foreach ($relations as $tagId) {
             $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
             $stmt->execute([$id, $tagId]);
-
-            if ($result) {
-                return true;
-            }
         }
 
-        
+        if ($result) {
+            return true;
+        }
     }
 }       
 
