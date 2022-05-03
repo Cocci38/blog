@@ -7,7 +7,7 @@ foreach($params['posts'] as $post): ?>
     <h2 class="card-header"><?= $post->title ?></h2> <!-- On a défini que l'on souhaitait récupérer les articles de cette façon-->
         <div>
         <?php foreach($post->getTags() as $tag) :  ?>
-            <span class="badge bg-info color-light"><a href="/site_poo/tags/<?= $tag->id ?>"> <?= $tag->name ?> </a></span><!-- On récupère le nom de nos tag qui sont liés à nos posts-->
+            <span class="badge bg-info color-light"><a href="/blog/tags/<?= $tag->id ?>"> <?= $tag->name ?> </a></span><!-- On récupère le nom de nos tag qui sont liés à nos posts-->
         <?php endforeach ?>
         </div>
         <small class="text-info">Publié le <?= $post->getCreatedAt() ?></small> <!-- La balise small pour écrire en petit (style commentaire) -->
