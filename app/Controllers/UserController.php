@@ -31,7 +31,7 @@ class UserController extends Controller{
             $_SESSION['auth'] = (int) $user->admin;
             return header('Location: /blog/admin/posts?success=true');
         } else {
-            return header('Location: /login');
+            return header('Location: /blog/login');
         }
     }
 
