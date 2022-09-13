@@ -10,11 +10,14 @@ class Validator{
     public function __construct(array $data)
     {
         $this->data = $data;
+        
     }
 
     public function validate(array $rules): ?array
     {
+        
         foreach ($rules as $name => $rulesArray) { // $name correspond au name des inputs et des colonnes de la bdd $rulesArray c'est le tableau validate dans UserController.php
+            
             if (array_key_exists($name, $this->data)) { //est-ce que la clé $name existe dans le tableau de donnée $this->data
                 foreach ($rulesArray as $rule) {
                     switch ($rule) {
@@ -36,8 +39,10 @@ class Validator{
     private function required(string $name, string $value)
     {
         $value = trim($value);
-
+        
+        //var_dump($name);die();
         if (!isset($value) || is_null($value) || empty($value)) {  // Si value est différent de isset OU est null OU est vide
+            
             $this->errors[$name][] = "{$name} est requis.";  // dans ce cas là j'ai une erreur
         }
     }
